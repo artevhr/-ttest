@@ -1,9 +1,7 @@
 """
 main.py — точка входа бота.
-
 Все callback_data роутятся здесь через один обработчик.
 """
-import asyncio
 import logging
 from telegram import Update
 from telegram.ext import (
@@ -43,48 +41,44 @@ logger = logging.getLogger(__name__)
 
 
 # ════════════════════════════════════════════════════════════
-# ГЛАВНЫЙ РОУТЕР CALLBACK
+# ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ РОУТИНГА
 # ════════════════════════════════════════════════════════════
 
-async def route_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+async def _route(data: str, update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    """Чистый роутер — принимает data явно, без изменения объекта update."""
     q = update.callback_query
-    data = q.data
-    user = q.from_user
-    await db.touch_user(user.id)
-    ctx.user_data["user_id"] = user.id
 
-    # ── Подписка / реклама ───────────────────────────────
+    # ── Подписка / реклама ───────────────────────────────────
     if data == "check_sub":
         await cb_check_sub(update, ctx); return
     if data.startswith("ad_skip_") or data == "ad_wait":
         await cb_ad_skip(update, ctx); return
 
-    # ── Главное меню ─────────────────────────────────────
-    if data == "back_main":
+    # ── Служебные ────────────────────────────────────────────
+    if data == "back_main" or data == "main":
         await q.answer()
-        await q.message.edit_text("Выбери раздел:", reply_markup=kb.main_menu()); return
+        await q.message.edit_text("Выбери раздел:", reply_markup=kb.main_menu())
+        return
     if data == "noop":
         await q.answer(); return
 
-    # ── Сборники ─────────────────────────────────────────
+    # ── Сборники ─────────────────────────────────────────────
     if data == "menu_collections":
         await cb_menu_collections(update, ctx); return
     if data.startswith("col_sub_"):
         await cb_col_subject(update, ctx, data[8:]); return
     if data.startswith("col_open_"):
-        # col_open_math_math_col_001  → subject=math, id=math_col_001
         raw = data[9:]
         sep = raw.index("_")
         await cb_col_open(update, ctx, raw[:sep], raw[sep+1:]); return
     if data.startswith("col_pg_"):
-        # col_pg_math_math_col_001_2
-        raw   = data[7:]
+        raw = data[7:]
         parts = raw.rsplit("_", 1)
-        page  = int(parts[1])
-        sep   = parts[0].index("_")
+        page = int(parts[1])
+        sep = parts[0].index("_")
         await cb_col_page(update, ctx, parts[0][:sep], parts[0][sep+1:], page); return
 
-    # ── Шпаргалки ────────────────────────────────────────
+    # ── Шпаргалки ────────────────────────────────────────────
     if data == "menu_cheat":
         await cb_menu_cheat(update, ctx); return
     if data.startswith("cheat_sub_"):
@@ -94,109 +88,78 @@ async def route_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         sep = raw.index("_")
         await cb_cheat_open(update, ctx, raw[:sep], raw[sep+1:]); return
     if data.startswith("cheat_pg_"):
-        # cheat_pg_math_math_cheat_001_1
-        raw   = data[9:]
+        raw = data[9:]
         parts = raw.rsplit("_", 1)
-        page  = int(parts[1])
-        sep   = parts[0].index("_")
+        page = int(parts[1])
+        sep = parts[0].index("_")
         await cb_cheat_page(update, ctx, parts[0][:sep], parts[0][sep+1:], page); return
 
-    # ── Тесты ────────────────────────────────────────────
+    # ── Тесты ────────────────────────────────────────────────
     if data == "menu_tests":
         await cb_menu_tests(update, ctx); return
     if data.startswith("test_sub_"):
         await cb_test_subject(update, ctx, data[9:]); return
-
     if data.startswith("test_type_"):
-        # test_type_math_drt
         parts = data[10:].split("_", 1)
         await cb_test_type(update, ctx, parts[0], parts[1]); return
-
     if data.startswith("test_year_"):
-        # test_year_math_drt_2025-2026
         parts = data[10:].split("_", 2)
         await cb_test_year(update, ctx, parts[0], parts[1], parts[2]); return
-
     if data.startswith("test_stage_"):
-        # test_stage_math_drt_2025-2026_I
         parts = data[11:].split("_", 3)
         await cb_test_stage(update, ctx, parts[0], parts[1], parts[2], parts[3]); return
-
     if data.startswith("test_var_"):
-        # test_var_math_drt_2025-2026_I_1
         parts = data[9:].split("_", 4)
         await cb_test_variant(update, ctx, parts[0], parts[1], parts[2], parts[3], parts[4]); return
-
     if data.startswith("ans_input_"):
         await cb_answer_input_prompt(update, ctx, data[10:]); return
-
     if data.startswith("ans_"):
-        # ans_math_drt_2025-2026_I_1_0_B
         raw = data[4:]
-        # последний _ разделяет base и ответ
         last = raw.rfind("_")
-        base = raw[:last]
         answer = raw[last+1:]
-        # предпоследний _ разделяет base и q_idx
+        base = raw[:last]
         prev = base.rfind("_")
         q_idx_str = base[prev+1:]
-        subject_ttype_etc = base[:prev].split("_", 4)  # subject ttype year stage variant
-        await cb_answer(update, ctx,
-                        subject_ttype_etc[0], subject_ttype_etc[1],
-                        subject_ttype_etc[2], subject_ttype_etc[3],
-                        subject_ttype_etc[4],
-                        q_idx_str, answer); return
-
+        etc = base[:prev].split("_", 4)
+        await cb_answer(update, ctx, etc[0], etc[1], etc[2], etc[3], etc[4], q_idx_str, answer); return
     if data.startswith("hint_"):
         await cb_hint(update, ctx, data[5:]); return
-
     if data.startswith("back_q_"):
         await cb_back_question(update, ctx, data[7:]); return
-
     if data.startswith("next_q_"):
         await cb_next_question(update, ctx, data[7:]); return
-
     if data.startswith("finish_"):
         await cb_finish(update, ctx, data[7:]); return
 
-    # ── Сокращённые сборники ─────────────────────────────
+    # ── Сокращённые сборники ─────────────────────────────────
     if data == "menu_short":
         await cb_menu_short(update, ctx); return
     if data.startswith("short_sub_"):
         await cb_short_subject(update, ctx, data[10:]); return
     if data.startswith("short_topic_"):
-        # short_topic_math_quadratic
         raw = data[12:]
         sep = raw.index("_")
         await cb_short_topic(update, ctx, raw[:sep], raw[sep+1:]); return
     if data.startswith("short_pg_"):
-        # short_pg_math_quadratic_0
         raw = data[9:]
         parts = raw.rsplit("_", 1)
         sep = parts[0].index("_")
-        subject = parts[0][:sep]
-        topic_id = parts[0][sep+1:]
-        await cb_short_page(update, ctx, subject, topic_id, int(parts[1])); return
+        await cb_short_page(update, ctx, parts[0][:sep], parts[0][sep+1:], int(parts[1])); return
 
-    # ── Ссылки / Кабинет ─────────────────────────────────
+    # ── Ссылки / Кабинет ─────────────────────────────────────
     if data == "menu_links":
         await cb_menu_links(update, ctx); return
     if data == "menu_cabinet":
         await cb_menu_cabinet(update, ctx); return
 
-    # ── Назад (универсальный) ────────────────────────────
+    # ── Назад (универсальный) — БЕЗ изменения update объекта ─
     if data.startswith("back_"):
         target = data[5:]
-        if target == "main":
-            await q.answer()
-            await q.message.edit_text("Выбери раздел:", reply_markup=kb.main_menu()); return
-        # back_col_sub_math → col_sub_math
         await q.answer()
-        ctx.bot_data["_back_data"] = target
-        update.callback_query.data = target
-        await route_callback(update, ctx); return
+        await _route(target, update, ctx)  # ← рекурсия через _route, не через update
+        return
 
-    # ── Админ ─────────────────────────────────────────────
+    # ── Админ ─────────────────────────────────────────────────
     if data == "adm_stats":
         await cb_adm_stats(update, ctx); return
     if data == "adm_ads":
@@ -208,8 +171,29 @@ async def route_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     if data == "adm_back":
         await cb_adm_back(update, ctx); return
 
-    logger.warning("Unhandled callback: %s", data)
-    await q.answer()
+    logger.warning("Unhandled callback_data: '%s'", data)
+    await q.answer("⚙️ Неизвестная команда", show_alert=False)
+
+
+# ════════════════════════════════════════════════════════════
+# ТОЧКА ВХОДА ДЛЯ CALLBACK — ОБОРАЧИВАЕМ В TRY/EXCEPT
+# ════════════════════════════════════════════════════════════
+
+async def route_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    q = update.callback_query
+    data = q.data
+    user = q.from_user
+
+    try:
+        await db.touch_user(user.id)
+        ctx.user_data["user_id"] = user.id
+        await _route(data, update, ctx)
+    except Exception as e:
+        logger.exception("❌ Ошибка в callback '%s': %s", data, e)
+        try:
+            await q.answer("❌ Что-то пошло не так. Попробуй ещё раз.", show_alert=True)
+        except Exception:
+            pass
 
 
 # ════════════════════════════════════════════════════════════
@@ -218,20 +202,21 @@ async def route_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
 async def route_text(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
-    await db.touch_user(user.id)
-    ctx.user_data["user_id"] = user.id
+    try:
+        await db.touch_user(user.id)
+        ctx.user_data["user_id"] = user.id
 
-    # Если ждём текстовый ответ на вопрос теста
-    sess = ctx.user_data.get("test_session")
-    if sess and sess.get("waiting_input") is not False and sess.get("waiting_input") is not None:
-        await handle_text_answer(update, ctx)
-        return
+        sess = ctx.user_data.get("test_session")
+        if sess and sess.get("waiting_input") is not False and sess.get("waiting_input") is not None:
+            await handle_text_answer(update, ctx)
+            return
 
-    # Если ждём ввод рекламы от админа
-    from handlers.admin import handle_admin_input
-    if ctx.user_data.get("admin_state"):
-        await handle_admin_input(update, ctx)
-        return
+        if ctx.user_data.get("admin_state"):
+            await handle_admin_input(update, ctx)
+            return
+
+    except Exception as e:
+        logger.exception("❌ Ошибка в route_text: %s", e)
 
 
 # ════════════════════════════════════════════════════════════
