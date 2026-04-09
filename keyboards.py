@@ -27,7 +27,7 @@ def main_menu() -> Markup:
 def subject_menu(section: str) -> Markup:
     rows = [[Btn(label, callback_data=f"{section}_sub_{key}")]
             for key, label in SUBJECTS.items()]
-    rows.append([back("main")])
+    rows.append(back("main"))
     return Markup(rows)
 
 
@@ -37,7 +37,7 @@ def collections_list(subject: str, items: list) -> Markup:
     items = [{"id":"math_col_001","title":"Сборник 2024"}, ...]
     """
     rows = [[Btn(f"📄 {i['title']}", callback_data=f"col_file_{i['id']}")] for i in items]
-    rows.append([back(f"col_sub_{subject}")])
+    rows.append(back(f"col_sub_{subject}"))
     return Markup(rows)
 
 
@@ -45,13 +45,13 @@ def collections_list(subject: str, items: list) -> Markup:
 def test_type_menu(subject: str) -> Markup:
     rows = [[Btn(label, callback_data=f"test_type_{subject}_{key}")]
             for key, label in TEST_TYPES.items()]
-    rows.append([back(f"test_sub_{subject}")])
+    rows.append(back(f"test_sub_{subject}"))
     return Markup(rows)
 
 
 def test_years_menu(subject: str, ttype: str, years: list) -> Markup:
     rows = [[Btn(y, callback_data=f"test_year_{subject}_{ttype}_{y}")] for y in years]
-    rows.append([back(f"test_type_{subject}_{ttype}")])
+    rows.append(back(f"test_type_{subject}_{ttype}"))
     return Markup(rows)
 
 
@@ -59,14 +59,14 @@ def test_stages_menu(subject: str, ttype: str, year: str, stages: list) -> Marku
     labels = {"I": "I этап", "II": "II этап", "III": "III этап"}
     rows = [[Btn(labels.get(s, s), callback_data=f"test_stage_{subject}_{ttype}_{year}_{s}")]
             for s in stages]
-    rows.append([back(f"test_year_{subject}_{ttype}_{year}")])
+    rows.append(back(f"test_year_{subject}_{ttype}_{year}"))
     return Markup(rows)
 
 
 def test_variants_menu(subject: str, ttype: str, year: str, stage: str, variants: list) -> Markup:
     rows = [[Btn(f"Вариант {v}", callback_data=f"test_var_{subject}_{ttype}_{year}_{stage}_{v}")]
             for v in variants]
-    rows.append([back(f"test_stage_{subject}_{ttype}_{year}_{stage}")])
+    rows.append(back(f"test_stage_{subject}_{ttype}_{year}_{stage}"))
     return Markup(rows)
 
 
@@ -106,7 +106,7 @@ def hint_back(base: str) -> Markup:
 def short_topics_menu(subject: str, topics: list) -> Markup:
     """topics = [{"id":"q_eq","title":"Квадратные уравнения"}, ...]"""
     rows = [[Btn(t["title"], callback_data=f"short_topic_{subject}_{t['id']}")] for t in topics]
-    rows.append([back(f"short_sub_{subject}")])
+    rows.append(back(f"short_sub_{subject}"))
     return Markup(rows)
 
 
@@ -119,14 +119,14 @@ def short_page_nav(subject: str, topic_id: str, page: int, total: int) -> Markup
     if page < total - 1:
         nav.append(Btn("➡️", callback_data=f"short_pg_{subject}_{topic_id}_{page+1}"))
     rows.append(nav)
-    rows.append([back(f"short_topic_{subject}_{topic_id}")])
+    rows.append(back(f"short_topic_{subject}_{topic_id}"))
     return Markup(rows)
 
 
 # ════════════════════════ ШПАРГАЛКИ ═════════════════════════
 def cheat_list(subject: str, items: list) -> Markup:
     rows = [[Btn(f"📌 {i['title']}", callback_data=f"cheat_file_{i['id']}")] for i in items]
-    rows.append([back(f"cheat_sub_{subject}")])
+    rows.append(back(f"cheat_sub_{subject}"))
     return Markup(rows)
 
 
