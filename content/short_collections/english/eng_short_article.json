@@ -1,0 +1,19 @@
+{
+  "id": "eng_short_article",
+  "title": "📌 Артикли (a/an, the, —)",
+  "subject": "english",
+  "pages": [
+    {
+      "title": "a / an — когда ставить?",
+      "content": "<b>a</b> — перед согласным звуком: <i>a book, a car, a university</i>\n<b>an</b> — перед гласным звуком: <i>an apple, an hour</i>\n\n✅ Ставим a/an:\n• Первое упоминание: <i>I bought <b>a</b> book.</i>\n• Любой представитель класса: <i><b>A</b> dog is a friend.</i>\n• Профессия: <i>She is <b>a</b> doctor.</i>\n• What a...!: <i>What <b>a</b> nice day!</i>"
+    },
+    {
+      "title": "the — когда ставить?",
+      "content": "✅ Ставим the:\n• Уже упоминалось: <i>I saw <b>a</b> film. <b>The</b> film was great.</i>\n• Единственное в мире: <i><b>the</b> sun, <b>the</b> moon, <b>the</b> Earth</i>\n• Известно из контекста: <i>Close <b>the</b> door!</i>\n• Превосходная степень: <i><b>the</b> best, <b>the</b> biggest</i>\n• Порядковые числительные: <i><b>the</b> first, <b>the</b> second</i>\n• Реки, горы, океаны: <i><b>the</b> Thames, <b>the</b> Alps, <b>the</b> Pacific</i>"
+    },
+    {
+      "title": "— (нулевой) — когда НЕ ставить?",
+      "content": "❌ Артикль НЕ ставится:\n• Имена людей: <i>Mary, John</i>\n• Страны, города: <i>France, London, Minsk</i>\n• Языки: <i>English, Russian</i>\n• Виды спорта: <i>football, chess</i>\n• Учреждение по функции: <i>go to school, in hospital</i>\n• Дни/месяцы: <i>on Monday, in January</i>\n• Устойчивые фразы: <i>at home, by car, on foot</i>"
+    }
+  ]
+}

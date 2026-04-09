@@ -1,0 +1,27 @@
+{
+  "id": "eng_short_tenses",
+  "title": "⏱ Времена глагола (шпаргалка)",
+  "subject": "english",
+  "pages": [
+    {
+      "title": "Present Simple vs Continuous",
+      "content": "<b>Present Simple</b> — всегда, регулярно:\n✅ always, usually, often, sometimes, never, every day\n<i>I <b>go</b> to school every day.</i>\n\n<b>Present Continuous</b> — сейчас, временно:\n✅ now, at the moment, still, today\n<i>I <b>am studying</b> right now.</i>\n\n⚠️ НЕ бывает Continuous: know, understand, want, like, love, hate, need, see, hear, believe, have (владение)"
+    },
+    {
+      "title": "Present Perfect vs Past Simple",
+      "content": "<b>Present Perfect</b> — результат важен СЕЙЧАС, нет времени:\n✅ just, already, yet, ever, never, recently, for, since\n<i>I <b>have lost</b> my key.</i> (и сейчас не могу войти)\n\n<b>Past Simple</b> — конкретное время в прошлом:\n✅ yesterday, ago, last week, in 2005, then\n<i>I <b>lost</b> my key yesterday.</i>"
+    },
+    {
+      "title": "Past Simple vs Past Continuous",
+      "content": "<b>Past Simple</b> — короткое событие.\n<b>Past Continuous</b> — длительный фон.\n\n<i>While she <b>was cooking</b> (фон), he <b>came</b> in (событие).</i>\n<i>When the phone <b>rang</b>, I <b>was sleeping</b>.</i>"
+    },
+    {
+      "title": "Future: will vs going to",
+      "content": "<b>will</b> — спонтанное решение, прогноз, обещание:\n<i>I <b>will</b> help you.</i> (решил только что)\n<i>I think it <b>will</b> rain.</i>\n\n<b>going to</b> — заранее запланировано, видимый признак:\n<i>I <b>am going to</b> visit Paris next month.</i> (план)\n<i>Look! It <b>is going to</b> rain!</i> (видишь тучи)"
+    },
+    {
+      "title": "Past Perfect — «раньше раньшего»",
+      "content": "<b>Past Perfect</b> = had + 3-я форма\n\nДействие завершилось ДО другого момента в прошлом:\n<i>When I arrived, she <b>had already left</b>.</i>\n(Она ушла раньше, чем я пришёл)\n\n✅ Маркеры: by the time, before, after, when, already, never, just"
+    }
+  ]
+}

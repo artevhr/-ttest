@@ -1,0 +1,19 @@
+{
+  "id": "eng_short_modals",
+  "title": "🔑 Модальные глаголы",
+  "subject": "english",
+  "pages": [
+    {
+      "title": "CAN / COULD",
+      "content": "<b>can</b> — умею, могу, разрешено:\n<i>I <b>can</b> swim. / You <b>can</b> go.</i>\n\n<b>can't</b> — не умею / невозможно / запрет:\n<i>I <b>can't</b> drive. / You <b>cannot</b> enter.</i>\n\n<b>could</b> — мог в прошлом / вежливая просьба:\n<i>I <b>could</b> run fast when I was young.</i>\n<i><b>Could</b> you help me, please?</i>\n\n⚠️ Замена: <b>be able to</b> (для всех времён):\n<i>I <b>will be able to</b> help you tomorrow.</i>"
+    },
+    {
+      "title": "MAY / MIGHT",
+      "content": "<b>may</b> — разрешение / возможность:\n<i>You <b>may</b> go. / It <b>may</b> rain.</i>\n\n<b>might</b> — меньшая вероятность / прошедшее косвенной речи:\n<i>She <b>might</b> come. / He said he <b>might</b> be late.</i>\n\n<b>may have + 3ф.</b> — возможно, случилось в прошлом:\n<i>She <b>may have left</b>.</i> — Возможно, она уже ушла."
+    },
+    {
+      "title": "MUST / HAVE TO / SHOULD",
+      "content": "<b>must</b> — обязан (внутренняя убеждённость):\n<i>You <b>must</b> do your homework.</i>\n\n<b>must</b> — уверенное предположение:\n<i>He <b>must</b> be tired.</i> — Он, должно быть, устал.\n\n<b>mustn't</b> — НЕЛЬЗЯ (запрет):\n<i>You <b>mustn't</b> smoke here.</i>\n\n<b>don't have to</b> — не нужно (нет необходимости):\n<i>You <b>don't have to</b> come.</i> — Тебе не нужно приходить.\n\n<b>should</b> — совет/рекомендация:\n<i>You <b>should</b> see a doctor.</i>\n\n<b>should have + 3ф.</b> — следовало сделать (но не сделал):\n<i>You <b>should have called</b> me!</i>"
+    }
+  ]
+}

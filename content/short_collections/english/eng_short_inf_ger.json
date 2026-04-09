@@ -1,0 +1,19 @@
+{
+  "id": "eng_short_inf_ger",
+  "title": "🔄 Инфинитив vs Герундий",
+  "subject": "english",
+  "pages": [
+    {
+      "title": "После каких глаголов — инфинитив?",
+      "content": "<b>Инфинитив (to do)</b> после:\nwant, wish, hope, decide, refuse, agree, offer, promise, manage, fail, afford, plan, learn, expect, seem, appear, threaten\n\n<i>I <b>want to go</b>.</i>\n<i>She <b>decided to leave</b>.</i>\n<i>He <b>refused to help</b>.</i>"
+    },
+    {
+      "title": "После каких глаголов — герундий?",
+      "content": "<b>Герундий (doing)</b> после:\nenjoy, mind, avoid, suggest, admit, deny, miss, keep, finish, give up, put off, can't help, practise, consider, imagine, risk, fancy\n\n<i>I <b>enjoy swimming</b>.</i>\n<i>She <b>suggested going</b> there.</i>\n<i>He <b>admitted stealing</b>.</i>\n<i>I <b>can't help laughing</b>.</i> — Не могу не смеяться.\n\n⚠️ После предлогов — ВСЕГДА герундий:\n<i>I'm tired of <b>waiting</b>.</i>\n<i>She left without <b>saying</b> a word.</i>"
+    },
+    {
+      "title": "Глаголы с разным смыслом",
+      "content": "<b>stop:</b>\n<i>He stopped <b>to smoke</b>.</i> — остановился, чтобы покурить\n<i>He stopped <b>smoking</b>.</i> — бросил курить\n\n<b>remember:</b>\n<i>Remember <b>to lock</b> the door.</i> — не забудь закрыть\n<i>I remember <b>seeing</b> him.</i> — помню, что видел\n\n<b>forget:</b>\n<i>Don't forget <b>to call</b>.</i> — не забудь позвонить\n<i>I'll never forget <b>meeting</b> you.</i> — не забуду нашу встречу\n\n<b>try:</b>\n<i>Try <b>to open</b> it.</i> — попробуй открыть (попытка)\n<i>Try <b>adding</b> some salt.</i> — попробуй добавить (эксперимент)"
+    }
+  ]
+}
